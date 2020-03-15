@@ -9,19 +9,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * Category
  */
 @Entity
 public class Category implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private UserEntity userEntity;
 
     private String name;
+
+    private String color;
 
     public Long getId() {
         return id;
@@ -47,6 +57,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    
+    public String getColor() {
+        return color;
+    }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
 }
