@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.JoinColumn;
 
 /**
@@ -25,6 +28,7 @@ public class Card implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private UserEntity userEntity;
 
     @Column(columnDefinition = "TEXT")

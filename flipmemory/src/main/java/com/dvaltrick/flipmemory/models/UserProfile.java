@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * UserProfile
  */
@@ -19,6 +21,7 @@ public class UserProfile implements Serializable {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private UserEntity userEntity;
 
     private String name;

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +36,31 @@ public class UserEntityController {
     public ResponseEntity<?> post(@RequestBody UserEntity toSave) {
         try{
             return new ResponseEntity<UserEntity>(service.save(toSave), HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
+
+    @RequestMapping(value="/api/userentity",
+            method={RequestMethod.PUT},
+            consumes=MediaType.APPLICATION_JSON_VALUE, 
+	        produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+    public ResponseEntity<?> put(@RequestBody UserEntity toSave) {
+        try{
+            return new ResponseEntity<UserEntity>(service.update(toSave), HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
+
+    @RequestMapping(value="/api/userentity/recovery/{username}",
+            method={RequestMethod.GET}, 
+	        produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+    public ResponseEntity<?> recovery(@PathVariable("username") String username) {
+        try{
+            return new ResponseEntity<String>(service.recovery(username), HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

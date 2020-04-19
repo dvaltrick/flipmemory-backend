@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.dvaltrick.flipmemory.enums.ResultAnswer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 /**
@@ -23,9 +24,11 @@ public class CardResponse implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Card card;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("userReference")
     private UserEntity userEntity;
 
     private ResultAnswer answer;

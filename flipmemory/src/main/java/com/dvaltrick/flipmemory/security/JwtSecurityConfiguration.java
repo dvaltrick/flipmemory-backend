@@ -45,6 +45,7 @@ public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(corsConfigurationSource()).and()
             .csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.GET, SecurityConstants.RECOVERY_URL).permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
